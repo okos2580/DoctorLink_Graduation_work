@@ -449,10 +449,10 @@ npm run dev
 
 - **이름**: 김태정
 - **학과**: 컴퓨터공학과 4학년
-- **학교**: 관동대학교
-- **개발 기간**: 2024.09 ~ 2025.01 (5개월)
+- **학교**: 서원대학교
+- **개발 기간**: 2024.11 ~ 2025.11 (12개월)
 - **GitHub**: [@okos2580](https://github.com/okos2580)
-- **이메일**: [your-email@example.com](mailto:your-email@example.com)
+- **이메일**: [kottang6@gmail.com](mailto:your-email@example.com)
 
 ### 개발 역할
 
