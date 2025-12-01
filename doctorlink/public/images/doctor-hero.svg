@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500" height="300" viewBox="0 0 500 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 배경 -->
+  <rect width="500" height="300" rx="16" fill="#F8FAFC"/>
+  
+  <!-- 의료 아이콘 그룹 -->
+  <g opacity="0.1">
+    <circle cx="60" cy="60" r="20" fill="#2C9DB8"/>
+    <rect x="150" y="40" width="40" height="40" rx="8" fill="#2C9DB8"/>
+    <path d="M400 80 C420 50 450 80 430 100" stroke="#2C9DB8" stroke-width="8"/>
+    <circle cx="350" cy="120" r="15" fill="#2C9DB8"/>
+    <rect x="100" y="200" width="30" height="30" rx="6" fill="#2C9DB8"/>
+    <rect x="420" y="180" width="20" height="20" rx="4" fill="#2C9DB8"/>
+  </g>
+  
+  <!-- 태블릿/디바이스 -->
+  <rect x="40" y="100" width="180" height="140" rx="10" fill="white" stroke="#E5E7EB" stroke-width="2"/>
+  <rect x="60" y="120" width="140" height="30" rx="5" fill="#F3F4F6"/>
+  <rect x="60" y="160" width="140" height="10" rx="2" fill="#F3F4F6"/>
+  <rect x="60" y="180" width="100" height="10" rx="2" fill="#F3F4F6"/>
+  <rect x="60" y="200" width="120" height="10" rx="2" fill="#F3F4F6"/>
+  
+  <!-- 캘린더 아이콘 -->
+  <rect x="60" y="120" width="24" height="24" rx="4" fill="#2C9DB8"/>
+  <rect x="65" y="125" width="14" height="14" rx="2" fill="white"/>
+  <line x1="68" y1="129" x2="76" y2="129" stroke="#2C9DB8" stroke-width="2"/>
+  <line x1="68" y1="133" x2="73" y2="133" stroke="#2C9DB8" stroke-width="2"/>
+  
+  <!-- 의사 캐릭터 (단순화된 스타일) -->
+  <circle cx="350" cy="100" r="40" fill="#2C9DB8"/>
+  <circle cx="350" cy="80" r="15" fill="#D3F2FA"/>
+  <rect x="330" y="140" width="40" height="80" rx="6" fill="#2C9DB8"/>
+  <circle cx="335" cy="160" r="5" fill="white"/>
+  <circle cx="365" cy="160" r="5" fill="white"/>
+  <path d="M340 170 Q350 175 360 170" stroke="white" stroke-width="2"/>
+  
+  <!-- 스마트폰/의료앱 -->
+  <rect x="280" y="130" width="40" height="70" rx="8" fill="white" stroke="#E5E7EB" stroke-width="2"/>
+  <rect x="285" y="135" width="30" height="45" rx="4" fill="#F3F4F6"/>
+  <circle cx="300" cy="190" r="5" fill="#E5E7EB"/>
+  <rect x="290" y="150" width="20" height="5" rx="1" fill="#2C9DB8"/>
+  <rect x="290" y="160" width="10" height="5" rx="1" fill="#2C9DB8"/>
+  
+  <!-- 의료 + 기술 연결선 -->
+  <path d="M220 170 Q260 150 280 170" stroke="#2C9DB8" stroke-width="2" stroke-dasharray="4 2"/>
+  <path d="M370 170 Q390 200 420 170" stroke="#2C9DB8" stroke-width="2" stroke-dasharray="4 2"/>
+  
+  <!-- 텍스트 -->
+  <text x="180" y="270" font-family="Arial" font-size="16" font-weight="bold" fill="#2C3E50">빠르고 간편한 의료 서비스 예약</text>
+</svg> 

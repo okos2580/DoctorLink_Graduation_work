@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카카오 SDK 테스트</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; }
+        .result { margin: 10px 0; padding: 10px; background: #f5f5f5; }
+        .error { background: #ffebee; color: #c62828; }
+        .success { background: #e8f5e8; color: #2e7d32; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>🧪 카카오 SDK 테스트</h1>
+    
+    <div class="test-section">
+        <h3>1. 기본 네트워크 테스트</h3>
+        <button onclick="testNetwork()">네트워크 연결 테스트</button>
+        <div id="networkResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>2. 카카오 SDK 로드 테스트</h3>
+        <button onclick="testSDKLoad()">SDK 로드 테스트</button>
+        <div id="sdkResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>3. 카카오 초기화 테스트</h3>
+        <button onclick="testKakaoInit()">초기화 테스트</button>
+        <div id="initResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>4. 카카오 로그인 버튼 테스트</h3>
+        <button onclick="testKakaoLogin()">로그인 테스트</button>
+        <div id="loginResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>5. 현재 환경 정보</h3>
+        <div id="envInfo" class="result"></div>
+    </div>
+
+    <script>
+        const APP_KEY = 'bf189a93b43b3653b58f19ab40ef6a07';
+        
+        // 환경 정보 표시
+        function showEnvironmentInfo() {
+            const info = {
+                userAgent: navigator.userAgent,
+                location: window.location.href,
+                protocol: window.location.protocol,
+                host: window.location.host,
+                cookieEnabled: navigator.cookieEnabled,
+                javaScriptEnabled: true,
+                localStorage: !!window.localStorage,
+                sessionStorage: !!window.sessionStorage
+            };
+            
+            document.getElementById('envInfo').innerHTML = 
+                '<pre>' + JSON.stringify(info, null, 2) + '</pre>';
+        }
+        
+        // 네트워크 연결 테스트
+        async function testNetwork() {
+            const result = document.getElementById('networkResult');
+            result.innerHTML = '🔄 네트워크 테스트 중...';
+            
+            try {
+                // 여러 CDN 테스트
+                const tests = [
+                    'https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js',
+                    'https://developers.kakao.com',
+                    'https://www.google.com'
+                ];
+                
+                const results = [];
+                
+                for (let url of tests) {
+                    try {
+                        const response = await fetch(url, { method: 'HEAD', mode: 'no-cors' });
+                        results.push(`✅ ${url}: 연결 가능`);
+                    } catch (error) {
+                        results.push(`❌ ${url}: ${error.message}`);
+                    }
+                }
+                
+                result.innerHTML = results.join('<br>');
+                result.className = 'result success';
+            } catch (error) {
+                result.innerHTML = `❌ 네트워크 테스트 실패: ${error.message}`;
+                result.className = 'result error';
+            }
+        }
+        
+        // SDK 로드 테스트
+        function testSDKLoad() {
+            const result = document.getElementById('sdkResult');
+            result.innerHTML = '🔄 SDK 로드 중...';
+            
+            // 기존 스크립트 제거
+            const existingScript = document.querySelector('script[src*="kakao"]');
+            if (existingScript) {
+                existingScript.remove();
+            }
+            
+            const script = document.createElement('script');
+            script.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js';
+            script.crossOrigin = 'anonymous';
+            
+            script.onload = function() {
+                setTimeout(() => {
+                    if (window.Kakao) {
+                        const kakaoInfo = {
+                            exists: !!window.Kakao,
+                            version: window.Kakao.VERSION || 'unknown',
+                            methods: Object.keys(window.Kakao),
+                            hasAuth: !!window.Kakao.Auth,
+                            hasAPI: !!window.Kakao.API,
+                            hasInit: typeof window.Kakao.init === 'function'
+                        };
+                        
+                        result.innerHTML = '✅ SDK 로드 성공<br><pre>' + 
+                            JSON.stringify(kakaoInfo, null, 2) + '</pre>';
+                        result.className = 'result success';
+                    } else {
+                        result.innerHTML = '❌ SDK 로드되었지만 window.Kakao 없음';
+                        result.className = 'result error';
+                    }
+                }, 1000);
+            };
+            
+            script.onerror = function() {
+                result.innerHTML = '❌ SDK 로드 실패';
+                result.className = 'result error';
+            };
+            
+            document.head.appendChild(script);
+        }
+        
+        // 초기화 테스트
+        function testKakaoInit() {
+            const result = document.getElementById('initResult');
+            
+            if (!window.Kakao) {
+                result.innerHTML = '❌ 카카오 SDK가 로드되지 않았습니다. 먼저 SDK 로드를 테스트하세요.';
+                result.className = 'result error';
+                return;
+            }
+            
+            try {
+                window.Kakao.init(APP_KEY);
+                
+                const initInfo = {
+                    isInitialized: window.Kakao.isInitialized ? window.Kakao.isInitialized() : 'unknown',
+                    appKey: APP_KEY,
+                    authExists: !!window.Kakao.Auth,
+                    authMethods: window.Kakao.Auth ? Object.keys(window.Kakao.Auth) : [],
+                    hasLogin: window.Kakao.Auth ? typeof window.Kakao.Auth.login === 'function' : false
+                };
+                
+                result.innerHTML = '✅ 초기화 성공<br><pre>' + 
+                    JSON.stringify(initInfo, null, 2) + '</pre>';
+                result.className = 'result success';
+            } catch (error) {
+                result.innerHTML = `❌ 초기화 실패: ${error.message}`;
+                result.className = 'result error';
+            }
+        }
+        
+        // 로그인 테스트
+        function testKakaoLogin() {
+            const result = document.getElementById('loginResult');
+            
+            if (!window.Kakao || !window.Kakao.Auth) {
+                result.innerHTML = '❌ 카카오 SDK 또는 Auth가 준비되지 않았습니다.';
+                result.className = 'result error';
+                return;
+            }
+            
+            if (typeof window.Kakao.Auth.login !== 'function') {
+                result.innerHTML = `❌ Auth.login이 함수가 아닙니다. 타입: ${typeof window.Kakao.Auth.login}`;
+                result.className = 'result error';
+                return;
+            }
+            
+            try {
+                result.innerHTML = '🔄 로그인 시도 중...';
+                
+                window.Kakao.Auth.login({
+                    success: function(response) {
+                        result.innerHTML = '✅ 로그인 성공<br><pre>' + 
+                            JSON.stringify(response, null, 2) + '</pre>';
+                        result.className = 'result success';
+                    },
+                    fail: function(error) {
+                        result.innerHTML = '❌ 로그인 실패<br><pre>' + 
+                            JSON.stringify(error, null, 2) + '</pre>';
+                        result.className = 'result error';
+                    }
+                });
+            } catch (error) {
+                result.innerHTML = `❌ 로그인 호출 실패: ${error.message}`;
+                result.className = 'result error';
+            }
+        }
+        
+        // 페이지 로드 시 환경 정보 표시
+        window.onload = function() {
+            showEnvironmentInfo();
+        };
+    </script>
+</body>
+</html> 
