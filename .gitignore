@@ -1,0 +1,140 @@
+# DoctorLink Project .gitignore
+
+# ==================== Dependencies ====================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ==================== Environment Variables ====================
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.*.local
+
+# ==================== Build Outputs ====================
+build/
+dist/
+out/
+*.log
+
+# ==================== React / Next.js ====================
+.next/
+.cache/
+public/static/
+*.tsbuildinfo
+
+# ==================== React Native / Expo ====================
+.expo/
+.expo-shared/
+dist/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# ==================== TypeScript ====================
+*.tsbuildinfo
+.tsbuildinfo
+
+# ==================== IDE / Editor ====================
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ==================== Database ====================
+*.mdf
+*.ldf
+*.bak
+*.trn
+*.sql~ 
+
+# ==================== OS Files ====================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ==================== Temporary Files ====================
+*.tmp
+*.temp
+tmp/
+temp/
+.cache/
+
+# ==================== Logs ====================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# ==================== Testing ====================
+coverage/
+*.coverage
+.nyc_output/
+.jest/
+
+# ==================== Production ====================
+# 웹 빌드는 보관하되, 너무 큰 파일은 제외
+build/static/**/*.map
+
+# ==================== Personal Files ====================
+# 개인 메모나 임시 파일
+notes.txt
+TODO.md
+scratch/
+
+# ==================== 졸업논문 (원본만 보관) ====================
+# HWP 파일은 보관하되, 임시 파일은 제외
+~*.hwp
+~$*.hwp
+
+# ==================== Screenshot Placeholders ====================
+# 실제 스크린샷 추가 전까지
+screenshots/**/*.png
+screenshots/**/*.jpg
+!screenshots/**/README.md
+
+# ==================== Sensitive Data ====================
+# 절대 커밋하지 말 것!
+*.pem
+*.key
+*.cert
+config/database.json
+config/secrets.json
+
+# ==================== Package Manager ====================
+.pnp
+.pnp.js
+
+# ==================== Miscellaneous ====================
+.vercel
+.eslintcache
+*.pid
+*.seed
+*.pid.lock
+.serverless/
+
